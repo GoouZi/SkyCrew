@@ -1,0 +1,73 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/debug/EnvironmentDebugPanel.cs" id="1_panel"]
+
+[node name="EnvironmentDebugPanel" type="CanvasLayer" node_paths=PackedStringArray("_timeSlider", "_timeLabel", "_playToggle", "_panel")]
+script = ExtResource("1_panel")
+_timeSlider = NodePath("Panel/Margin/Rows/TimeSlider")
+_timeLabel = NodePath("Panel/Margin/Rows/TimeRow/Time")
+_playToggle = NodePath("Panel/Margin/Rows/TimeRow/AutoPlay")
+_panel = NodePath("Panel")
+
+[node name="Panel" type="PanelContainer" parent="."]
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 344.0
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="Rows" type="VBoxContainer" parent="Panel/Margin"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Panel/Margin/Rows"]
+layout_mode = 2
+text = "环境调试 [F3]"
+
+[node name="TimeRow" type="HBoxContainer" parent="Panel/Margin/Rows"]
+layout_mode = 2
+
+[node name="Time" type="Label" parent="Panel/Margin/Rows/TimeRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "08:30"
+
+[node name="AutoPlay" type="CheckButton" parent="Panel/Margin/Rows/TimeRow"]
+layout_mode = 2
+text = "自动昼夜"
+
+[node name="TimeSlider" type="HSlider" parent="Panel/Margin/Rows"]
+layout_mode = 2
+max_value = 24.0
+step = 0.016666667
+value = 8.5
+
+[node name="CameraRow" type="HBoxContainer" parent="Panel/Margin/Rows"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/Margin/Rows/CameraRow"]
+layout_mode = 2
+text = "预览镜头"
+
+[node name="Camera" type="OptionButton" parent="Panel/Margin/Rows/CameraRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 4
+popup/item_0/text = "云海全景"
+popup/item_0/id = 0
+popup/item_1/text = "云层上方"
+popup/item_1/id = 1
+popup/item_2/text = "空中巡览"
+popup/item_2/id = 2
+popup/item_3/text = "云底仰视"
+popup/item_3/id = 3
+
+[connection signal="toggled" from="Panel/Margin/Rows/TimeRow/AutoPlay" to="." method="OnPlayToggled"]
+[connection signal="drag_started" from="Panel/Margin/Rows/TimeSlider" to="." method="OnTimeDragStarted"]
+[connection signal="value_changed" from="Panel/Margin/Rows/TimeSlider" to="." method="OnTimeChanged"]
+[connection signal="item_selected" from="Panel/Margin/Rows/CameraRow/Camera" to="." method="OnCameraSelected"]

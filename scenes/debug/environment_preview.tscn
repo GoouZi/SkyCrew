@@ -1,0 +1,53 @@
+[gd_scene format=3]
+
+[ext_resource type="AnimationLibrary" path="res://assets/animations/environment/cloud_flight.tres" id="1_flight"]
+
+[sub_resource type="Curve3D" id="Curve3D_flight"]
+bake_interval = 5.0
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 60, 448, 950, 0, -19, 280, 0, 18, -280, 60, 475, 30, -3, -13, 310, 7, 13, -310, 85, 554, -1460, 0, 0, 0, 0, 0, 0, 108, 618, -2690),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[node name="Preview" type="Node3D"]
+
+[node name="Overview" type="Camera3D" parent="."]
+position = Vector3(0, 355, 1180)
+rotation = Vector3(0.094, 0, 0)
+current = true
+fov = 65.0
+near = 2.0
+far = 8500.0
+
+[node name="AboveClouds" type="Camera3D" parent="."]
+position = Vector3(70, 1210, 905)
+rotation = Vector3(-0.27, 0, 0)
+fov = 67.0
+near = 2.0
+far = 8500.0
+
+[node name="FlightPath" type="Path3D" parent="."]
+curve = SubResource("Curve3D_flight")
+
+[node name="Follower" type="PathFollow3D" parent="FlightPath"]
+rotation_mode = 0
+loop = false
+
+[node name="FlightCamera" type="Camera3D" parent="FlightPath/Follower"]
+rotation = Vector3(0.035, 0, 0)
+fov = 72.0
+near = 1.0
+far = 8500.0
+
+[node name="FlightAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": ExtResource("1_flight")
+}
+
+[node name="UnderClouds" type="Camera3D" parent="."]
+position = Vector3(0, 24, 485)
+rotation = Vector3(1.02, 0, 0)
+fov = 88.0
+near = 2.0
+far = 8500.0
