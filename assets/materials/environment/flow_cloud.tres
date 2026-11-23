@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bwmgjrfr3p1g8"]
+
+[ext_resource type="Shader" uid="uid://7qqpejh46y1v" path="res://assets/shaders/environment/flow_cloud.gdshader" id="1_shader"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_shader")

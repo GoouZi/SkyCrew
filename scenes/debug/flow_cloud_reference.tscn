@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="ArrayMesh" path="res://assets/models/environment/clouds/flow_cloud_mesh.res" id="1_mesh"]
+[ext_resource type="Material" path="res://assets/materials/environment/flow_cloud.tres" id="2_material"]
+[ext_resource type="Shader" path="res://assets/shaders/environment/flow_cloud_reference_sky.gdshader" id="3_sky_shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sky"]
+shader = ExtResource("3_sky_shader")
+shader_parameter/bottom_color = Color(0.018, 0.065, 0.12, 1)
+shader_parameter/top_color = Color(0.07, 0.24, 0.38, 1)
+
+[sub_resource type="Sky" id="Sky_cloud"]
+sky_material = SubResource("ShaderMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_cloud"]
+background_mode = 2
+sky = SubResource("Sky_cloud")
+tonemap_mode = 2
+tonemap_exposure = 3.28
+glow_enabled = true
+glow_intensity = 3.5
+glow_bloom = 0.07
+
+[node name="Cloud" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cloud")
+
+[node name="CloudModel" type="MeshInstance3D" parent="."]
+transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, -4, 0)
+material_override = ExtResource("2_material")
+cast_shadow = 0
+mesh = ExtResource("1_mesh")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 5, 22)
+current = true
+fov = 47.0
+far = 250.0

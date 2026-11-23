@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://ga7w04awflho"]
+
+[ext_resource type="Shader" uid="uid://tcg3e41vggva" path="res://assets/shaders/environment/soft_sky.gdshader" id="1_shader"]
+
+[resource]
+shader = ExtResource("1_shader")

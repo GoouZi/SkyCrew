@@ -12,7 +12,8 @@ config_version=5
 
 config/name="SkyCrew"
 config/version="0.0.1"
-config/features=PackedStringArray("4.7", "Forward Plus")
+run/main_scene="res://scenes/world/world.tscn"
+config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [display]
@@ -32,4 +33,22 @@ project/assembly_name="SkyCrew"
 
 [rendering]
 
-rendering_device/driver.windows="d3d12"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+
+
+[shader_globals]
+
+skycrew_sun_direction={
+"type": "vec3",
+"value": Vector3(0.5205, 0.3994, -0.7547)
+}
+
+skycrew_cloud_light={
+"type": "color",
+"value": Color(0.92, 0.92, 0.87, 1)
+}
+skycrew_cloud_shadow={
+"type": "color",
+"value": Color(0.23, 0.31, 0.40, 1)
+}
